@@ -241,6 +241,7 @@ class SamAutomaticMaskGenerator:
         cropped_im = image[:, y0:y1, x0:x1]
         cropped_im_size = cropped_im.shape[1:]
         cropped_im = cropped_im.unsqueeze(0).contiguous()
+        cropped_im = self.predictor.transform.apply_image_torch(cropped_im)
         self.predictor.set_torch_image(cropped_im, cropped_im_size)
 
         # Get points for this crop
